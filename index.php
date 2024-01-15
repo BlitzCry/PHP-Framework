@@ -11,13 +11,25 @@ $headers = getallheaders();
 
 $resolver = match($request['uri']) {
     "/home" => [
-        "method" => "GET",
+        "method" => ["GET"],
         "class" => HomeController::class,
+    ],
+    "/login" => [
+        "method" => ["POST"],
+        "class" => LoginController::class,
+    ],
+    default => [
+        'method' => null,
+        'class' => null,
     ],
 };
 
 if(!in_array($request['method'], $resolver['method'])) {
     // Throw an error
+    echo "Error thrown";
+
+    return;
 }
 
-($resolver['class'])();
+echo "Resolve class";
+// ($resolver['class'])();
