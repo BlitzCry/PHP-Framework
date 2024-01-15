@@ -1,5 +1,10 @@
 <?php 
 
+try {
+    
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Http/Controllers/HomeController.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Http\Controllers\LoginController.php';
+
 $request = [
     'uri' => $_SERVER['REQUEST_URI'],
     'method' => $_SERVER['REQUEST_METHOD'],
@@ -31,5 +36,8 @@ if(!in_array($request['method'], $resolver['method'])) {
     return;
 }
 
-echo "Resolve class";
-// ($resolver['class'])();
+
+    echo (new $resolver['class'])();
+} catch (\Throwable $th) {
+    echo $th;
+}
